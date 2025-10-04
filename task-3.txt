@@ -1,4 +1,64 @@
-Öğrenci No:
-AD-SOYAD:
+Öğrenci No:250542019
+AD-SOYAD:ALİ İSTANBULLU
 
 Lütfen seçtiğiniz algoritmaya ait çözümü ve diğer isterleri aşağıya ekleyiniz:
+
+FONKSIYON SİSTEMATİK_ENVANTER_KATEGORİZASYONU(EnvanterListesi, KuralSeti)
+  
+  // 1. HAZIRLIK AŞAMASI (Veri Yapılarını Başlatma)
+  
+  Kategorize_Edilenler = YENI LİSTE()
+  Atanmamış_Kalanlar = YENI LİSTE()
+  ToplamUrunSayisi = EnvanterListesi.BOYUT
+  
+  YAZDIR("--- Başlangıç: " + ToplamUrunSayisi + " Ürün İçin Kategorizasyon ---")
+  
+  // 2. ANA İŞLEME DÖNGÜSÜ (Tekrar Eden İşlem)
+  
+  HER Ürün İÇİN EnvanterListesi'NDE TEKRARLA
+    
+    // Her ürün için bir bayrak belirle
+    KategoriBulundu = YANLIŞ // Başlangıçta Kategori Bulunamadı varsayımı
+    
+    // 3. KURAL KONTROL MODÜLÜ (İç Döngü)
+    
+    // Ürünün her bir kuralı sırayla denemesi
+    HER Kural İÇİN KuralSeti'NDE TEKRARLA
+      
+      KategoriAdi = Kural.Ad
+      AnahtarKelimeler = Kural.Kelimeler
+      
+      // 3.1. Koşul Kontrolü (Eşleşme Araştırılması)
+      EĞER Ürün.Ad, AnahtarKelimeler'den BİRİNİ BÜYÜK_KÜÇÜK_DUYARSIZ İÇERİYOR İSE
+        
+        // 3.2. BAŞARILI ATAMA
+        Ürün.Kategori = KategoriAdi  // Ürüne Kategori Adını ata
+        Kategorize_Edilenler.EKLE(Ürün)
+        KategoriBulundu = DOĞRU     // Bayrağı DOĞRU olarak değiştir
+        
+        KIR (Bu Ürün İçin Kural Kontrolünü Bitir) // Doğru kural bulunduysa zaman kaybetme
+      
+      SON_EĞER
+      
+    SON_HER // Kural Kontrolü Modülü Bitişi
+    
+    // 4. KARAR AŞAMASI (Koşullu Durum)
+    
+    // Bayrak durumuna göre ürünü tasnif et
+    EĞER KategoriBulundu = YANLIŞ İSE
+      // Ürün hiçbir kurala uymadıysa
+      Atanmamış_Kalanlar.EKLE(Ürün)
+    SON_EĞER
+    
+  SON_HER // Ana İşleme Döngüsü Bitişi
+  
+  // 5. RAPORLAMA VE ÇIKIŞ
+  
+  YAZDIR("\n--- Rapor ---")
+  YAZDIR("Toplam Kategorize Edilen: " + Kategorize_Edilenler.BOYUT + " ürün.")
+  YAZDIR("Atanmamış/Manuel Gereken: " + Atanmamış_Kalanlar.BOYUT + " ürün.")
+  
+  DÖN { "Kategorili_Liste": Kategorize_Edilenler, "Manuel_Müdahale": Atanmamış_Kalanlar }
+BİTİR FONKSİYON
+
+BİTİR FONKSIYON
