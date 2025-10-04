@@ -1,4 +1,116 @@
-Öğrenci No:
-AD-SOYAD:
+Öğrenci No:250542019
+AD-SOYAD:ALİ İSTANBULLU
 
 Lütfen seçtiğiniz algoritmaya ait çözümü ve diğer isterleri aşağıya ekleyiniz:
+
+FONKSIYON EN_KISA_SUREDE_UNIVERSITE()
+  
+  // 1. Lise Süreci Kontrolü (Tekrar eden işlem: Ders çalışma döngüsü)
+  
+  EĞER LiseDurumu = "LiseDevam" İSE
+    YAZDIR("Lise Eğitimine Odaklanılıyor ve YKS Hazırlığı Başlatılıyor.")
+    
+    // YKS Hazırlık Döngüsü (Tekrar eden işlem)
+    TEKRARLA (Sürekli Çalışma İhtiyacı Devam Ederken)
+      YAZDIR("YKS/TYT/AYT konularını çalış, deneme çöz.")
+      // Koşul: Deneme notları hedefe yakın mı?
+      EĞER DenemeNotlari_Hedef_Yakın() İSE
+        YAZDIR("Çalışma temposu korunuyor, eksikler gideriliyor.")
+      DEĞİLSE
+        YAZDIR("Eksik konular belirlenip, ek çalışma programı uygulanıyor.")
+      SON_EĞER
+      
+      EĞER LiseBitirme_Sınavı_Yapıldı() İSE
+        LiseDurumu = "LiseMezun"
+        KIR (Döngüden Çık)
+      SON_EĞER
+    SON_TEKRARLA
+  
+  YAZDIR("Lise Mezuniyeti Tamamlandı: " + LiseDurumu)
+
+  
+  // 2. YKS Hazırlık ve Sınav Aşaması (Koşullu durumlar)
+  
+  EĞER HazirlikDurumu = FALSE İSE
+    YAZDIR("Lise mezuniyetinden sonra YKS hazırlığına başlanıyor (1. Yıl).")
+    HazirlikDurumu = TRUE
+    // YKS Çalışma Döngüsü - 1 Yıl (Tekrar eden işlem)
+    TEKRARLA (1 Yıl Boyunca)
+      YAZDIR("YKS Kapsamlı Çalışma Programı uygulanıyor.")
+      // ... Çalışma detayları (Yukarıdaki gibi) ...
+    SON_TEKRARLA
+  
+  YAZDIR("YKS Sınavına Giriliyor.")
+  
+  // 3. Sınav Sonucu Değerlendirme (Koşullu durum)
+  
+  BEKLE (Sınav Sonuçları Açıklanana Kadar)
+  
+  EĞER YeterliPuan = TRUE İSE
+    YAZDIR("Tebrikler, hedeflenen programa yetecek puan alındı.")
+    ADIM = "TercihYap"
+  DEĞİLSE
+    YAZDIR("Yeterli puan alınamadı. Alternatifler değerlendiriliyor.")
+    ADIM = "TekrarHazırlık_Veya_Alternatif"
+  SON_EĞER
+  
+  
+  // 4. Tercih ve Yerleşme Aşaması (Koşullu durum ve döngü)
+  
+  EĞER ADIM = "TercihYap" İSE
+    YAZDIR("Hedef programa uygun tercihler listesi hazırlanıyor.")
+    TercihYapıldı = TRUE
+    BEKLE (Yerleştirme Sonuçları Açıklanana Kadar)
+    
+    // Yerleşme Sonucuna Göre Koşullu Durum
+    EĞER YerleşmeSonucu = "Yerleşti" İSE
+      YAZDIR("BAŞARI: Üniversiteye yerleşildi. Kayıt işlemleri başlatılıyor.")
+      DÖN ("Üniversiteye Yerleşildi") // Algoritma Sonu
+    DEĞİLSE EĞER YerleşmeSonucu = "Yerleşmedi" İSE
+      YAZDIR("Yerleşilemedi. Bir sonraki yıl için hazırlık veya ek kontenjan değerlendiriliyor.")
+      ADIM = "TekrarHazırlık_Veya_Alternatif"
+    DEĞİLSE // "Beklemede" veya Diğer Durumlar
+      YAZDIR("Sonuç bekleniyor veya ek/özel kontenjanlar takip ediliyor.")
+      // Tekrar Tercih Kontrolü - Döngü
+      TEKRARLA (Ek tercih hakkı varken VE YerleşmeSonucu = "Yerleşmedi" İSE)
+        YAZDIR("Ek tercih listesi hazırlanıyor ve sunuluyor.")
+        BEKLE (Ek Yerleştirme Sonuçları)
+        EĞER Yeni_YerleşmeSonucu = "Yerleşti" İSE
+          YAZDIR("BAŞARI: Ek yerleştirmeyle üniversiteye yerleşildi.")
+          DÖN ("Üniversiteye Yerleşildi (Ek Kontenjan)")
+        SON_EĞER
+      SON_TEKRARLA
+    SON_EĞER // YerleşmeSonucu Kontrolü Bitişi
+
+  
+  // 5. Alternatif Senaryo: Tekrar Hazırlık (Döngü)
+  
+  EĞER ADIM = "TekrarHazırlık_Veya_Alternatif" İSE
+    YAZDIR("En kısa sürede yerleşme hedefi için 2. Yıl YKS hazırlık planlanıyor.")
+    
+    // Tekrar Hazırlık Döngüsü (Tekrar eden işlem)
+    TEKRARLA (Yeniden YKS'ye Girme Kararı Alındığı Sürece)
+      YAZDIR("Tekrar YKS Çalışma Programı (Yeni yıl takvimi) uygulanıyor.")
+      YAZDIR("2. Yıl Sınavına Giriliyor.")
+      BEKLE (Yeni Sınav Sonuçları)
+      
+      EĞER Yeni_YeterliPuan = TRUE İSE
+        YAZDIR("Yeterli puan alındı, tercih süreci yeniden başlatılıyor.")
+        // Tercih Yap ve Yerleşme Aşamasına Dönüş
+        YerleşmeSonucu = YENI_TERCIH_VE_YERLESME_SURECI() // Alt fonksiyon çağrısı
+        EĞER YerleşmeSonucu = "Yerleşti" İSE
+          DÖN ("Üniversiteye Yerleşildi (2. Giriş)")
+        DEĞİLSE
+          YAZDIR("Yerleşilemedi. 3. yıl hazırlık veya kariyer alternatifi düşünülüyor.")
+          // Döngü devam eder veya kariyer alternatifine geçilir.
+        SON_EĞER
+      DEĞİLSE
+        YAZDIR("Tekrar yeterli puan alınamadı. Alternatif kariyer yolları araştırılıyor.")
+        KIR (Döngüden Çık)
+      SON_EĞER
+    SON_TEKRARLA
+    
+    DÖN ("Üniversiteye Yerleşilemedi / Alternatif Kariyer Planı Başlatıldı")
+  SON_EĞER // TekrarHazırlık Bitişi
+
+BİTİR FONKSIYON
