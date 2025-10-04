@@ -1,4 +1,48 @@
-Öğrenci No:
-AD-SOYAD:
+Öğrenci No:250542019
+AD-SOYAD:ALİ İSTANBULLU
 
 Lütfen seçtiğiniz algoritmaya ait çözümü ve diğer isterleri aşağıya ekleyiniz:
+
+FONKSIYON SIHIRLI_SAYI_HILESI(BaslangicSayisi)
+
+  YAZDIR("Lütfen 1 ile 100 arasında bir tam sayı tutun.")
+  // BaslangicSayisi'nı (X) alıyoruz, ancak kullanıcıya sorulmadan
+  
+  // 1. İşlem Zincirini Başlatma (Tekrar eden ardışık işlemler)
+  
+  // X = BaslangicSayisi
+
+  YAZDIR("\nADIM 1: Tuttuğunuz sayıyı 3 ile ÇARPIN.")
+  Adim1_Sonuc = BaslangicSayisi * 3   // X * 3 = 3X
+  
+  YAZDIR("ADIM 2: Şimdi sonuca 10 EKLEYİN.")
+  Adim2_Sonuc = Adim1_Sonuc + 10      // 3X + 10
+  
+  YAZDIR("ADIM 3: Sonucu 3'e BÖLÜN (Kalanları unutun, sadece tam sayı).")
+  // NOT: Bu adım, cebirsel olarak (3X + 10) / 3 = X + 3.33... sonucunu verir.
+  // Tam sayı bölmesi (Integer Division) olduğu için, 3.33... kısmının tam sayı kısmı alınır.
+  Adim3_Sonuc = Adim2_Sonuc BÖLÜ 3    // X + 3 (Yaklaşık)
+  
+  // 2. Tuttuğu Sayıyı Çıkarma (Kritik Koşullu Durum: X'i Sıfırlama)
+  
+  YAZDIR("ADIM 4: Şimdi, en başta tuttuğunuz sayıyı (BaslangicSayisi) en son sonuçtan ÇIKARIN.")
+  Adim4_Sonuc = Adim3_Sonuc - BaslangicSayisi  // (X + 3) - X = 3
+  
+  // 3. Nihai Sonucu Belirleme ve Açıklama
+  
+  YAZDIR("\nArtık elinizde, başlangıçtaki sayınızdan bağımsız bir sayı kaldı (Yaklaşık 3).")
+  
+  YAZDIR("ADIM 5: Sonucunuza 2 EKLEYİN.")
+  NihaiSonuc = Adim4_Sonuc + 2 // 3 + 2 = 5
+  
+  // Koşullu Sonuç
+  EĞER NihaiSonuc = 5 İSE
+    YAZDIR("\n*** SONUÇ AÇIKLANIYOR ***")
+    YAZDIR("Elinizdeki nihai sonuç kesinlikle 5!")
+  DEĞİLSE
+    YAZDIR("Hata Oluştu, lütfen işlemleri kontrol edin.")
+  SON_EĞER
+  
+  DÖN NihaiSonuc
+
+BİTİR FONKSIYON
