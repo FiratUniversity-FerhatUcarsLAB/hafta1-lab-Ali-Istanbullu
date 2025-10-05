@@ -1,4 +1,80 @@
-Öğrenci No:
-AD-SOYAD:
+Öğrenci No:250542019
+AD-SOYAD:ALİ İSTANBULLU
 
 Lütfen seçtiğiniz algoritmaya ait çözümü ve diğer isterleri aşağıya ekleyiniz:
+
+BAŞLA
+FONKSIYON HEDEF_RENK_KARISTIRMA(Hedef_R, Hedef_G, Hedef_B, HataPayı_Eşik)
+
+  // 1. BAŞLANGIÇ AYARLARI
+  
+  // Mevcut renk değerlerini sıfırdan başlat (veya rastgele bir renk ile)
+  Mevcut_R = 0
+  Mevcut_G = 0
+  Mevcut_B = 0
+  DenemeSayısı = 0
+  
+  // 2. ANA DÖNGÜ: Hata Payı Kabul Edilebilir Olana Kadar Tekrarla (Tekrar Eden İşlem)
+  
+  TEKRARLA (DOĞRU İSE) // Sonsuz döngü, KIR komutuyla çıkılacak
+    
+    DenemeSayısı = DenemeSayısı + 1
+    
+    // 2.1. Hata Hesaplama Modülü
+    
+    // Farkı (Mutlak Değer) hesapla
+    Hata_R = MUTLAK_DEGER(Hedef_R - Mevcut_R)
+    Hata_G = MUTLAK_DEGER(Hedef_G - Mevcut_G)
+    Hata_B = MUTLAK_DEGER(Hedef_B - Mevcut_B)
+    
+    // Toplam Hatayı bul (En büyük hatayı baz alabiliriz)
+    ToplamHata = MAKSIMUM(Hata_R, Hata_G, Hata_B)
+    
+    YAZDIR("Deneme #" + DenemeSayısı + ". Toplam Hata: " + ToplamHata)
+    
+    // 2.2. DURDURMA KOŞULU (Hedefe Ulaşıldı mı?)
+    
+    EĞER ToplamHata <= HataPayı_Eşik İSE
+      YAZDIR("BAŞARI: Hedef renge kabul edilebilir hata payı dahilinde ulaşıldı.")
+      KIR (Döngüden Çık)
+    SON_EĞER
+    
+    // 2.3. RENK AYARLAMA MODÜLÜ (Koşullu Durumlar)
+    
+    AyarlamaMiktarı = 10 // Her adımda yapılacak ayarlama miktarı (Küçük adım, hassas sonuç)
+    
+    // Kırmızı Bileşeni Ayarlama
+    EĞER Mevcut_R < Hedef_R İSE
+      // Mevcut değer, hedeften düşükse artır
+      Mevcut_R = Mevcut_R + AyarlamaMiktarı
+    DEĞİLSE EĞER Mevcut_R > Hedef_R İSE
+      // Mevcut değer, hedeften yüksekse azalt
+      Mevcut_R = Mevcut_R - AyarlamaMiktarı
+    SON_EĞER
+    
+    // Yeşil Bileşeni Ayarlama
+    EĞER Mevcut_G < Hedef_G İSE
+      Mevcut_G = Mevcut_G + AyarlamaMiktarı
+    DEĞİLSE EĞER Mevcut_G > Hedef_G İSE
+      Mevcut_G = Mevcut_G - AyarlamaMiktarı
+    SON_EĞER
+    
+    // Mavi Bileşeni Ayarlama
+    EĞER Mevcut_B < Hedef_B İSE
+      Mevcut_B = Mevcut_B + AyarlamaMiktarı
+    DEĞİLSE EĞER Mevcut_B > Hedef_B İSE
+      Mevcut_B = Mevcut_B - AyarlamaMiktarı
+    SON_EĞER
+    
+    // Değerleri 0-255 Aralığında Tutma (RGB Kısıtlaması)
+    Mevcut_R = SINIRLA(Mevcut_R, 0, 255)
+    Mevcut_G = SINIRLA(Mevcut_G, 0, 255)
+    Mevcut_B = SINIRLA(Mevcut_B, 0, 255)
+    
+  SON_TEKRARLA // Ana Döngü Bitişi
+  
+  // 3. SONUÇ GÖNDERME
+  DÖN { "R": Mevcut_R, "G": Mevcut_G, "B": Mevcut_B, "Deneme": DenemeSayısı }
+BİTİR FONKSİYON
+
+BİTİR FONKSIYON
