@@ -3,6 +3,7 @@ AD-SOYAD:ALİ İSTANBULLU
 
 Lütfen seçtiğiniz algoritmaya ait çözümü ve diğer isterleri aşağıya ekleyiniz:
 
+BAŞLA
 FONKSIYON EN_KISA_SUREDE_UNIVERSITE()
   
   // 1. Lise Süreci Kontrolü (Tekrar eden işlem: Ders çalışma döngüsü)
