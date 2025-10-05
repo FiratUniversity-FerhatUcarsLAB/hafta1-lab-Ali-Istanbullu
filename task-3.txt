@@ -3,6 +3,7 @@ AD-SOYAD:ALİ İSTANBULLU
 
 Lütfen seçtiğiniz algoritmaya ait çözümü ve diğer isterleri aşağıya ekleyiniz:
 
+BAŞLA
 FONKSIYON SİSTEMATİK_ENVANTER_KATEGORİZASYONU(EnvanterListesi, KuralSeti)
   
   // 1. HAZIRLIK AŞAMASI (Veri Yapılarını Başlatma)
