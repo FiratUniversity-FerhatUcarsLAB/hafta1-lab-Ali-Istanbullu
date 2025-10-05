@@ -3,6 +3,7 @@ AD-SOYAD:ALİ İSTANBULLU
 
 Lütfen seçtiğiniz algoritmaya ait çözümü ve diğer isterleri aşağıya ekleyiniz:
 
+BAŞLA
 FONKSIYON SIHIRLI_SAYI_HILESI(BaslangicSayisi)
 
   YAZDIR("Lütfen 1 ile 100 arasında bir tam sayı tutun.")
